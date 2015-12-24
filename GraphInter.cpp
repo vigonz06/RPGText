@@ -80,7 +80,7 @@ bool GraphInter::find(std::ifstream &file, std::string scentinel)
 std::string GraphInter::get(std::string filename, std::string scentinel)
 {
 	std::ifstream file;
-	std::string text;
+	std::string line, text = "";
 
 	file.open(filename);
 
@@ -88,13 +88,22 @@ std::string GraphInter::get(std::string filename, std::string scentinel)
 	{
 		if (find(file, scentinel))
 		{
-			file >> text;
+			do
+			{
+				std::getline(file, line);
+				text += line + '\n';
+			} while (line != "");
 
 			file.close();
 
 			return text;
 		}
-		else return "Text not found";
+		else
+		{
+			file.close();
+
+			return "Text not found";
+		}
 	}
 	else return "File not found";
 }
@@ -116,6 +125,8 @@ Menu* GraphInter::substract(std::string filename, std::string scentinel)
 			{
 				delete menu;
 
+				file.close();
+
 				return nullptr;
 			}
 			else
@@ -125,7 +136,12 @@ Menu* GraphInter::substract(std::string filename, std::string scentinel)
 				return menu;
 			}
 		}
-		else return nullptr;
+		else
+		{
+			file.close();
+
+			return nullptr;
+		}
 	}
 	else return nullptr;
 }
