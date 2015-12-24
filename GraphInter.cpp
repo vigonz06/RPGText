@@ -73,20 +73,22 @@ bool GraphInter::find(std::ifstream &file, std::string scentinel)
 	//de manera que lo proximo que se obtenga del archivo
 	//sea lo correspondiente a dicho centinela
 	//si no encuentra el centinela, devuelve false
+	
+	sdt::string ignore;
+	
+	do
+	{
+		std::getline(file, ignore);
+	}while(ignore != scentinel && !file.eof());
 
-	if(file.is_open())
-	 {
-        	std::string line;
-        	while(getline (file,line))
-        	{
-        		if (line.find(scentinel) != std::string::npos)
-        	 	{
-        			return true;
-        	 	}
-
-        	}
-    	}
-	return false;
+	if(ignore == sceentinel)
+	{
+		return true;
+	}else
+	{
+		return false;
+	}
+	
 }
 
 std::string GraphInter::get(std::string filename, std::string scentinel)
