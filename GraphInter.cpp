@@ -70,8 +70,8 @@ bool GraphInter::find(std::ifstream &file, std::string scentinel)
 	return true; //placeholder
 
 	//to do David
-	//la funcion debe localizar el centinela, 
-	//y situar la variable archivo en esa posicion, 
+	//la funcion debe localizar el centinela,
+	//y situar la variable archivo en esa posicion,
 	//de manera que lo proximo que se obtenga del archivo
 	//sea lo correspondiente a dicho centinela
 	//si no encuentra el centinela, devuelve false
@@ -207,7 +207,7 @@ std::string GraphInter::center_word(std::string word, int length, std::string ar
 {
 	if (word.size() != length)
 	{
-		for (int i = word.size(); i < length; i++)
+		do
 		{
 			if (word.size() % 2 == 0)
 			{
@@ -217,7 +217,7 @@ std::string GraphInter::center_word(std::string word, int length, std::string ar
 			{
 				word = arround + word;
 			}
-		}
+		} while (word.size() < length);
 	}
 	return word;
 }
@@ -226,10 +226,10 @@ std::string GraphInter::put_right(std::string word, int length, std::string arro
 {
 	if (word.size() != length)
 	{
-		for (int i = word.size(); i < length; i++)
+		do
 		{
 			word = arround + word;
-		}
+		} while (word.size() < length);
 	}
 	return word;
 }

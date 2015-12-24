@@ -113,7 +113,7 @@ void List<T>::erase()
 	counter = 0;
 }*/
 
-//Searchs the position where 
+//Searchs the position where
 //an element should be
 template<class T>
 bool List<T>::search(const std::string id, int &pos, int ini, int fin) const
@@ -138,8 +138,8 @@ bool List<T>::search(const std::string id, int &pos, int ini, int fin) const
 	}
 }
 
-//Using the id of an element, searchs it 
-//on the list and returns the position 
+//Using the id of an element, searchs it
+//on the list and returns the position
 //where it is placed
 template<class T>
 T* List<T>::get(const std::string &id)
@@ -162,17 +162,12 @@ T* List<T>::get(const std::string &id)
 template<class T>
 void List<T>::save(const std::string &name)
 {
-	std::ofstream file;
-
-	file.open(name);
+	std::ofstream file(name);
 
 	for (int i = 0; i < this->length(); i++)
 	{
 		this->list[i]->save(file);
 	}
-
-	file << "XXX";
-
 	file.close();
 }
 
@@ -181,11 +176,10 @@ void List<T>::save(const std::string &name)
 template<class T>
 bool List<T>::load(const std::string &name)
 {
-	std::ifstream file;
+	std::ifstream file(name);
 	bool right;
 	T* elem;
 
-	file.open(name);
 
 	if (file.is_open())
 	{
@@ -221,7 +215,7 @@ void List<T>::shiftRight(const int pos)
 	}
 }
 
-//It moves every elements on the list 
+//It moves every elements on the list
 //to the right from the position you choose
 template <class T>
 void List<T>::shiftLeft(const int pos)
