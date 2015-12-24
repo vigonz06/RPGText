@@ -24,19 +24,24 @@ public:
 	//Output
 	void display(std::string error);
 
+	bool find(std::ifstream &file, std::string scentinel);
+	std::string get(const std::string filename, std::string scentinel);
+	Menu* substract(const std::string filename, std::string scentinel);
+
 private:
 
 	static GraphInter* inter;
 
-	GraphInter() {}//to prevent instantation
+	GraphInter() {}
 
 	int update(int key, int elem, int max_elems);
 
 	int menu(Menu* menu);
 
-	//Formatting strings
-	std::string center_word(std::string word, int length, std::string arround);
 	void tab_word(std::string word, int pos, int cont);
 	std::string tab_word(std::string word);
+
+	std::string center_word(std::string word, int length, std::string arround);
+	std::string put_right(std::string word, int length, std::string arround);
 };
 #endif

@@ -66,21 +66,20 @@
   <ItemGroup>
     <ClInclude Include="checkML.h" />
     <ClInclude Include="Combate.h" />
+    <ClInclude Include="Date.h" />
     <ClInclude Include="Globalconstants.h" />
     <ClInclude Include="GraphInter.h" />
     <ClInclude Include="ItemList.h" />
     <ClInclude Include="Items.h" />
     <ClInclude Include="List.h" />
-    <ClInclude Include="Menu.h" />
-    <ClInclude Include="MenuList.h" />
     <ClInclude Include="Personajes.h" />
-    <ClInclude Include="OptionList.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="UtilsWin.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Combate.cpp" />
+    <ClCompile Include="Date.cpp" />
     <ClCompile Include="GraphInter.cpp" />
-    <ClCompile Include="ItemList.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

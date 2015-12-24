@@ -38,7 +38,7 @@ public:
 	//bool pop(T* elem); //Erases elem from list. WARNING: Does not delete!
 	//void erase(); //Points list to null. Doesn't delete
 
-	bool search(const std::string &id, int &pos, int &left_key, int &right_key) const;
+	bool search(const std::string id, int &pos, int ini, int fin) const;
 	T* get(const std::string &id);
 
 	void save(const std::string &name);
@@ -64,8 +64,8 @@ bool List<T>::insert(T* elem)
 	if (full()) resize(dim * 3 / 2 + 1);
 	//Look for corresponding position
 	int pos;
-	int left_key = 0, right_key = counter - 1;
-	search(elem->getId(), pos, left_key, right_key);
+	int ini = 0, fin = counter - 1;
+	search(elem->getId(), pos, ini, fin);
 	//Make space for newcomer
 	shiftRight(pos);
 	//Insert elem
@@ -80,8 +80,8 @@ template<class T>
 bool List<T>::destroy(const std::string &id)
 {
 	int pos;
-	int left_key = 0, right_key = counter - 1;
-	if (search(id, pos, left_key, right_key))
+	int ini = 0, fin = counter - 1;
+	if (search(id, pos, ini, fin))
 	{
 		delete list[pos];
 		list[pos] = nullptr;
@@ -116,23 +116,24 @@ void List<T>::erase()
 //Searchs the position where 
 //an element should be
 template<class T>
-bool List<T>::search(const std::string &id, int &pos, int &left_key, int &right_key) const
+bool List<T>::search(const std::string id, int &pos, int ini, int fin) const
 {
-	if (left_key <= right_key)
+	if (ini <= fin)
 	{
-		pos = (left_key + right_key) / 2;
+		pos = (ini + fin) / 2;
 
-		if (list[pos]->getId() == id) return true;
+		if (list[pos]->id == id) return true;
 
-		else if (list[pos]->getId() < id)
-			left_key = pos + 1;
-		else right_key = pos - 1;
+		if (list[pos]->id < id) ini = pos + 1;
 
-		return search(id, pos, left_key, right_key);
+		if (list[pos]->id > id) fin = pos - 1;
+
+		return search(id, pos, ini, fin);
 	}
 	else
 	{
-		pos = left_key;
+		pos = ini;
+
 		return false;
 	}
 }
@@ -144,8 +145,8 @@ template<class T>
 T* List<T>::get(const std::string &id)
 {
 	int pos = 0;
-	int left_key = 0, right_key = counter - 1;
-	if (search(id, pos, left_key, right_key))
+	int ini = 0, fin = counter - 1;
+	if (search(id, pos, ini, fin))
 	{
 		return list[pos];
 	}
@@ -190,7 +191,7 @@ bool List<T>::load(const std::string &name)
 	{
 		right = true;
 
-		for (int i = 0; right; i++)
+		while (right)
 		{
 			elem = new T;
 

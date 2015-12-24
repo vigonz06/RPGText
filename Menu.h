@@ -1,29 +1,34 @@
 #ifndef MENU
 #define MENU
 
-#include "OptionList.h"
-#include <fstream>
+#include "List.h"
 #include <string>
+#include <fstream>
+#include "checkML.h"
 
-struct Menu
+class Menu: public List<std::string>
 {
-	std::string id;
-	OptionList* options;
+public:
 
 	bool load(std::ifstream &file);
 };
 
 bool Menu::load(std::ifstream &file)
 {
-	file >> id;
+	int n;
+	std::string* option;
 
-	if (file.fail())
+	file >> n;
+
+	for (int i = 0; i < n; i++)
 	{
-		if (options->load(file)) return true;
+		option = new std::string;
 
-		else return false;
+		file >> *option;
+		list[counter++] = option;
+
+		if (file.fail()) return false;
 	}
-	else return false;
+	return true;
 }
-
 #endif
