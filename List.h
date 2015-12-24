@@ -4,6 +4,7 @@
 #include "GlobalConstants.h"
 #include "checkML.h"
 #include <string>
+#include <fstream>
 
 /*----------------------------
 This is a base class for all the lists this program has

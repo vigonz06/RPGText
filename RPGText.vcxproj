@@ -64,9 +64,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="checkML.h" />
     <ClInclude Include="Combate.h" />
-    <ClInclude Include="Date.h" />
     <ClInclude Include="Globalconstants.h" />
     <ClInclude Include="GraphInter.h" />
     <ClInclude Include="ItemList.h" />
@@ -78,7 +76,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Combate.cpp" />
-    <ClCompile Include="Date.cpp" />
     <ClCompile Include="GraphInter.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>

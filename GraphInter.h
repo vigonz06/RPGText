@@ -1,6 +1,7 @@
 #ifndef GRAPHINTER
 #define GRAPHINTER
 
+#include <cstdlib>
 #include <string>
 #include "Menu.h"
 

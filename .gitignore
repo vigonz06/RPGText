@@ -279,3 +279,8 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+RPGText.vcxproj
+RPGText.vcxproj
+*.filters
+RPGText.vcxproj
+*.vcxproj
