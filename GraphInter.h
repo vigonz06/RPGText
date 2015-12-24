@@ -43,6 +43,5 @@ private:
 	std::string tab_word(std::string word);
 
 	std::string center_word(std::string word, int length, std::string arround);
-	std::string put_right(std::string word, int length, std::string arround);
 };
 #endif

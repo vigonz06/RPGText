@@ -221,15 +221,3 @@ std::string GraphInter::center_word(std::string word, int length, std::string ar
 	}
 	return word;
 }
-
-std::string GraphInter::put_right(std::string word, int length, std::string arround)
-{
-	if (word.size() != length)
-	{
-		do
-		{
-			word = arround + word;
-		} while (word.size() < length);
-	}
-	return word;
-}
