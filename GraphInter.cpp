@@ -67,14 +67,26 @@ void GraphInter::display(std::string error)
 
 bool GraphInter::find(std::ifstream &file, std::string scentinel)
 {
-	return true; //placeholder
-
 	//to do David
 	//la funcion debe localizar el centinela,
 	//y situar la variable archivo en esa posicion,
 	//de manera que lo proximo que se obtenga del archivo
 	//sea lo correspondiente a dicho centinela
 	//si no encuentra el centinela, devuelve false
+
+	if(file.is_open())
+	 {
+        	std::string line;
+        	while(getline (file,line))
+        	{
+        		if (line.find(scentinel) != std::string::npos)
+        	 	{
+        			return true;
+        	 	}
+
+        	}
+    	}
+	return false;
 }
 
 std::string GraphInter::get(std::string filename, std::string scentinel)
