@@ -23,7 +23,7 @@ struct Character
 	//pero recuerda, solo lo que sea comun a ambos)
 
 	//para que entiendas la herencia:
-	//ahora no hace falta declarar la variable name ni en
+	//ahora no hace falta declarar la variable id ni en
 	//personaje ni en npc, ya que al ser esta una structura 
 	//base de ambos, dicha variable pasa a ser de ellos
 };
