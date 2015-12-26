@@ -1,11 +1,11 @@
-#ifndef Personajes
-#define Personajes
+#ifndef Characters
+#define Characters
 
 #include <string>
 
-struct Personaje
+struct Character
 {
-	std::string name; //evidente que ambos van a tener nombres
+	std::string id; //evidente que ambos van a tener nombres
 
 	//to do David
 	//caracteristicas comunes 
@@ -19,13 +19,13 @@ struct Personaje
 	//base de ambos, dicha variable pasa a ser de ellos
 };
 
-struct NPC: public Personaje
+struct NPC : public Character
 {
 	//to do David
 	//caracteristicas individuales de los npc
 };
 
-struct Jugador: public Personaje
+struct Player : public Character
 {
 	//to do David
 	//caracteristicas individuales del jugador

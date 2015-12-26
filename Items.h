@@ -11,7 +11,7 @@
 
 struct Item
 {
-	std::string name;
+	std::string id;
 	bool found;
 	std::string properties;
 
@@ -24,7 +24,7 @@ bool Item::load(std::ifstream &file)
 {
 	std::string line, text = "";
 
-	std::getline(file, name);
+	std::getline(file, id);
 
 	if (!file.fail())
 	{
@@ -53,7 +53,7 @@ bool Item::load(std::ifstream &file)
 
 void Item::save(std::ofstream &file)
 {
-	file << name << std::endl
+	file << id << std::endl
 		<< found << std::endl
 		<< properties << std::endl 
 		<< std::endl;

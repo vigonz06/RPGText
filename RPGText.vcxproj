@@ -64,19 +64,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Combate.h" />
+    <ClInclude Include="Combat.h" />
     <ClInclude Include="File.h" />
     <ClInclude Include="Globalconstants.h" />
     <ClInclude Include="GraphInter.h" />
     <ClInclude Include="ItemList.h" />
     <ClInclude Include="Items.h" />
     <ClInclude Include="List.h" />
-    <ClInclude Include="Personajes.h" />
+    <ClInclude Include="Characters.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="Places.h" />
     <ClInclude Include="UtilsWin.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Combate.cpp" />
+    <ClCompile Include="Combat.cpp" />
     <ClCompile Include="GraphInter.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>

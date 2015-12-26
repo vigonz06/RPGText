@@ -1,5 +1,5 @@
-#ifndef COMBATE
-#define COMBATE
+#ifndef COMBAT
+#define COMBAT
 
 #include "Personajes.h"
 
