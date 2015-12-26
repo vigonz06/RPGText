@@ -6,7 +6,6 @@
 struct Player : public Character
 {
 	string arma_equipada;
-	string clase;
 
 };
 
