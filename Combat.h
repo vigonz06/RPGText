@@ -1,7 +1,7 @@
 #ifndef COMBAT
 #define COMBAT
 
-#include "Personajes.h"
+#include "Characters.h"
 
 //to do David
 //to do Victor

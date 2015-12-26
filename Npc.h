@@ -10,7 +10,7 @@ typedef enum Dificultad
 	Dificil
 };
 
-struct NPC : public Character
+struct Npc : public Character
 {
 	//to do David
 	//caracteristicas individuales de los npc
