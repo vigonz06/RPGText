@@ -56,4 +56,6 @@ void Item::find()
 	{
 		found = true;
 	}
-}#endif
+}
+
+#endif
