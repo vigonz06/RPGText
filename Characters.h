@@ -2,6 +2,7 @@
 #define Characters
 
 #include <string>
+#include <fstream>
 #include "Clase.h"
 
 //Si vas a hacer una estructura de ataque, con daño, municion, mana, defensa, magie, etc...
@@ -12,8 +13,27 @@ struct Ataque
 {
  	int daño; //las variables si pueden contener caracteres tales como la ñ
 	int mana;
-	int municion;
 
+	bool load(std::ifstream &file)
+	{
+		file >> daño;
+
+		if (!file.fail())
+		{
+			file >> mana;
+
+			if (!file.fail()) return true;
+
+			else return false;
+		}
+		else return false;
+	}
+
+	void save(std::ofstream &file)
+	{
+		file << daño << " "
+			<< mana << std::endl;
+	}
 };
 
 struct Character

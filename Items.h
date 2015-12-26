@@ -8,27 +8,28 @@
 
 #include <string>
 #include <fstream>
+#include "Globalconstants.h"
 
 struct Item
 {
 	std::string id;
-	bool found;
-	std::string properties;
+	std::string descripcion;
+	int counter;
 
 	bool load(std::ifstream &file);
 	void save(std::ofstream &file);
-	void find();
+	bool find();
 };
 
 bool Item::load(std::ifstream &file)
 {
 	std::string line, text = "";
 
-	std::getline(file, id);
+	file >> id;
 
 	if (!file.fail())
 	{
-		file >> found;
+		file >> counter;
 
 		if (!file.fail())
 		{
@@ -40,7 +41,7 @@ bool Item::load(std::ifstream &file)
 
 			if (!file.fail())
 			{
-				properties = text;
+				descripcion = text;
 
 				return true;
 			}
@@ -53,18 +54,19 @@ bool Item::load(std::ifstream &file)
 
 void Item::save(std::ofstream &file)
 {
-	file << id << std::endl
-		<< found << std::endl
-		<< properties << std::endl 
-		<< std::endl;
+	file << id << counter 
+		<< std::endl << descripcion 
+		<< std::endl << std::endl;
 }
 
-void Item::find()
+bool Item::find()
 {
-	if (!found)
+	if (counter < MAX_ITEMS)
 	{
-		found = true;
+		counter++;
+		return true;
 	}
+	else return false;
 }
 
 #endif

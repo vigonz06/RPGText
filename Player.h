@@ -1,23 +1,61 @@
 #ifndef PLAYER
 #define PLAYER
 
-#include "Characters.h"
 #include "Arma.h"
+#include <fstream>
+#include "ItemList.h"
+#include "Characters.h"
 
-struct Objeto
-{
-	std::string id;
-	std::string tipo;
-	std::string descripcion;
-	int num_objetos//limitar un maximo
-
-};
 
 struct Player : public Character
 {
 	Arma arma_equipada;
-	//inventario
+	ItemList inventario;
 
+	bool load();
+	bool save();
 };
+
+bool Player::load()
+{
+	std::ifstream file;
+
+	file.open("Player.txt");
+
+	if (file.is_open());
+	{
+		file >> id;
+
+		if (!file.fail() && clase.load(file))
+		{
+			file >> vida;
+
+			if (!file.fail())
+			{
+				file >> armadura;
+
+				if (!file.fail() && ataque.load(file) && arma_equipada.load(file) && inventario.load(file)) return true;
+
+				else return false;
+			}
+			else return false;
+		}
+		else return false;
+	}
+}
+
+void Player::save()
+{
+	std::ofstream file;
+
+	file.open("Player.txt");
+
+	file << id << " " << vida
+		<< " " << armadura << std::endl;
+
+	ataque.save(file);
+	arma_equipada.save(file);
+	inventario.save(file);
+}
 
 #endif

@@ -3,6 +3,7 @@
 
 const int
 START_ELEMS = 10,
-HORIZONTAL = 79;
+HORIZONTAL = 79,
+MAX_ITEMS = 10;
 
 #endif
