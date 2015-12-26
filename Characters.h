@@ -20,6 +20,7 @@ struct Character
 	std::string id; //evidente que ambos van a tener nombres
 
 	string nombre;
+	string clase;
 	int vida;
 	int mana;
 	int municion;
