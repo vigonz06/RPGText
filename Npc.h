@@ -16,7 +16,6 @@ struct Npc : public Character
 	//caracteristicas individuales de los npc
 
 	Dificultad dificultad;
-	string tipe;
 
 	void init(); //la inicializacion dependera de la dificultad
 };
