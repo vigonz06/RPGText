@@ -6,6 +6,7 @@
 struct Clase
 {
 	std::string id;
+	std::descripcion;
 };
 
 #endif
