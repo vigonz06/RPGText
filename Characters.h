@@ -19,16 +19,4 @@ struct Character
 	//base de ambos, dicha variable pasa a ser de ellos
 };
 
-struct NPC : public Character
-{
-	//to do David
-	//caracteristicas individuales de los npc
-};
-
-struct Player : public Character
-{
-	//to do David
-	//caracteristicas individuales del jugador
-};
-
 #endif

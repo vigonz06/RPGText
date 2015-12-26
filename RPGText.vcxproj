@@ -73,7 +73,9 @@
     <ClInclude Include="List.h" />
     <ClInclude Include="Characters.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="Npc.h" />
     <ClInclude Include="Places.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="UtilsWin.h" />
   </ItemGroup>
   <ItemGroup>
