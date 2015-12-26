@@ -26,20 +26,8 @@ bool Player::load()
 	{
 		file >> id;
 
-		if (!file.fail() && clase.load(file))
-		{
-			file >> vida;
+		if (!file.fail() && clase.load(file) && defensa.load(file) && ataque.load(file) && arma_equipada.load(file) && inventario.load(file)) return true;
 
-			if (!file.fail())
-			{
-				file >> armadura;
-
-				if (!file.fail() && ataque.load(file) && arma_equipada.load(file) && inventario.load(file)) return true;
-
-				else return false;
-			}
-			else return false;
-		}
 		else return false;
 	}
 }
@@ -50,9 +38,9 @@ void Player::save()
 
 	file.open("Player.txt");
 
-	file << id << " " << vida
-		<< " " << armadura << std::endl;
+	file << id << std::endl;
 
+	defensa.save(file);
 	ataque.save(file);
 	arma_equipada.save(file);
 	inventario.save(file);

@@ -36,14 +36,40 @@ struct Ataque
 	}
 };
 
+struct Defensa
+{
+	int vida;
+	int armadura;
+
+	bool load(std::ifstream &file)
+	{
+		file >> vida;
+
+		if (!file.fail())
+		{
+			file >> armadura;
+
+			if (!file.fail()) return true;
+
+			else return false;
+		}
+		else return false;
+	}
+
+	void save(std::ofstream &file)
+	{
+		file << vida << " "
+			<< armadura << std::endl;
+	}
+};
+
 struct Character
 {
 	std::string id; //el id es el nombre, hay que poner id ya que todas las structs deben tener el mismo identificador, por temas de la lista base
 	Clase clase;
 	//hay que poner std:: delante de todo lo que te lo pida, ya que como trabajamos con varios archivos, no usamos el "using"
 	//std::string clase; para la clase hay que hacer una struct
-	int vida;
-	int armadura;
+	Defensa defensa;
 	Ataque ataque; //como el ataque engloba esas tres cosas, ponemos un objeto de este tipo, y lo tenemos englobado
 };
 
