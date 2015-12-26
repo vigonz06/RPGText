@@ -61,7 +61,7 @@ protected:
 template<class T>
 bool List<T>::insert(T* elem)
 {
-	if (full()) resize(dim * 3 / 2 + 1);
+	if (full()) resize(dim + 1);
 	//Look for corresponding position
 	int pos;
 	int ini = 0, fin = counter - 1;

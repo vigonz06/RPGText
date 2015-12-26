@@ -25,10 +25,6 @@ public:
 	//Output
 	void display(std::string error);
 
-	bool find(std::ifstream &file, std::string scentinel);
-	std::string get(const std::string filename, std::string scentinel);
-	Menu* substract(const std::string filename, std::string scentinel);
-
 private:
 
 	static GraphInter* inter;

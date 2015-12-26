@@ -4,7 +4,7 @@
 //to do David
 //le pongo esto de momento, si se te ocurren mas cosas,
 //o ves que sobrea el propierties, editalo, pero no olvides
-//adaptar la funcion de carga
+//adaptar la funcion de cargar
 
 #include <string>
 #include <fstream>
@@ -16,6 +16,7 @@ struct Item
 	std::string properties;
 
 	bool load(std::ifstream &file);
+	void save(std::ofstream &file);
 	void find();
 };
 
@@ -48,6 +49,14 @@ bool Item::load(std::ifstream &file)
 		else return false;
 	}
 	else return false;
+}
+
+void Item::save(std::ofstream &file)
+{
+	file << name << std::endl
+		<< found << std::endl
+		<< properties << std::endl 
+		<< std::endl;
 }
 
 void Item::find()
