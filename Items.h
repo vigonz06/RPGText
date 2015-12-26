@@ -19,6 +19,7 @@ struct Item
 	bool load(std::ifstream &file);
 	void save(std::ofstream &file);
 	bool find();
+	bool use();
 };
 
 bool Item::load(std::ifstream &file)
@@ -64,6 +65,17 @@ bool Item::find()
 	if (counter < MAX_ITEMS)
 	{
 		counter++;
+		return true;
+	}
+	else return false;
+}
+
+bool Item::use()
+{
+	if (counter > 0)
+	{
+		counter--;
+
 		return true;
 	}
 	else return false;

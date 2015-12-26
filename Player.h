@@ -13,7 +13,7 @@ struct Player : public Character
 	ItemList inventario;
 
 	bool load();
-	bool save();
+	void save();
 };
 
 bool Player::load()
