@@ -5,8 +5,8 @@
 
 struct Player : public Character
 {
-	//to do David
-	//caracteristicas individuales del jugador
+	string arma_equipada;
+	string clase;
 
 };
 
