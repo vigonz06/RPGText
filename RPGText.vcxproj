@@ -64,6 +64,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Arma.h" />
+    <ClInclude Include="Clase.h" />
     <ClInclude Include="Combat.h" />
     <ClInclude Include="File.h" />
     <ClInclude Include="Globalconstants.h" />
@@ -72,6 +74,8 @@
     <ClInclude Include="Items.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Characters.h" />
+    <ClInclude Include="ListaArmas.h" />
+    <ClInclude Include="ListaClases.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Npc.h" />
     <ClInclude Include="Places.h" />

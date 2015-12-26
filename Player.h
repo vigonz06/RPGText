@@ -2,10 +2,11 @@
 #define PLAYER
 
 #include "Characters.h"
+#include "Arma.h"
 
 struct Player : public Character
 {
-	string arma_equipada;
+	Arma arma_equipada;
 
 };
 
