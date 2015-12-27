@@ -44,5 +44,19 @@ void main()
 		//va a ser chungo
 		//precisa de centinela de terminacion
 		//hay que modificar el menu para poder salir y guardar
-	} while (second != 5 //5 es un placeholder);*/
+	} while (!last_place() && second != 5 //5 es un placeholder);
+
+	if (second == 5)
+	{
+		player->save(); //si sales del juego, se guarda la partida
+	}
+	else
+	{
+		std::remove("Player.txt") //si terminas el juego se borra la partida
+	}
+
+	delete places;
+	delete player;
+	delete place;
+	*/
 }

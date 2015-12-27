@@ -32,17 +32,6 @@ struct Places
 		}
 		else return false;
 	}
-
-	void save(std::ofstream &file)
-	{
-		file << id << std::endl
-			<< descripcion
-			<< std::endl;
-
-		menu->save(file);
-
-		file << orden;
-	}
 };
 
 #endif
