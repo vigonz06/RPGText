@@ -100,6 +100,47 @@ int GraphInter::menu(Menu* menu)
 	return elem;
 }
 
+int GraphInter::menu(Places* places)
+{
+	int key = UP, elem = 0;
+
+	do
+	{
+		display(places->id + ": ");
+		display("");
+		display(places->descripcion);
+		display(linea());
+
+		for (int i = 0; i < places->menu->length(); i++)
+		{
+			tab_word(*places->menu->operator[](i), i, elem);
+		}
+
+		key = getKey();
+		elem = update(key, elem, places->menu->length());
+
+		clearConsole();
+
+	} while (key != ENTER && key != ESCAPE);
+
+	return elem;
+}
+
+int GraphInter::mainMenu()
+{
+	Menu* main = new Menu;
+
+	std::string* options[2];
+
+	*options[0] = "New Game";
+	*options[1] = "Continue";
+
+	main->insert(options[0]);
+	main->insert(options[1]);
+
+	return menu(main);
+}
+
 void GraphInter::tab_word(std::string word, int pos, int cont)
 {
 	if (pos == cont)

@@ -11,6 +11,7 @@ struct Player : public Character
 {
 	Arma arma_equipada;
 	ItemList inventario;
+	int mapa;
 
 	bool load();
 	void save();
@@ -26,9 +27,14 @@ bool Player::load()
 	{
 		file >> id;
 
-		if (!file.fail() && clase.load(file) && defensa.load(file) && ataque.load(file) && arma_equipada.load(file) && inventario.load(file)) return true;
+		if (!file.fail())
+		{
+			file >> mapa;
 
-		else return false;
+			if (!file.fail() && clase.load(file) && defensa.load(file) && ataque.load(file) && arma_equipada.load(file) && inventario.load(file)) return true;
+
+			else return false;
+		}
 	}
 }
 
@@ -38,7 +44,8 @@ void Player::save()
 
 	file.open("Player.txt");
 
-	file << id << std::endl;
+	file << id << " " <<
+		mapa << std::endl;
 
 	defensa.save(file);
 	ataque.save(file);

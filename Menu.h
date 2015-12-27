@@ -10,6 +10,7 @@ class Menu: public List<std::string>
 public:
 
 	bool load(std::ifstream &file);
+	void save(std::ofstream &file);
 };
 
 bool Menu::load(std::ifstream &file)
@@ -29,5 +30,15 @@ bool Menu::load(std::ifstream &file)
 		if (file.fail()) return false;
 	}
 	return true;
+}
+
+void Menu::save(std::ofstream &file)
+{
+	file << counter << std::endl;
+
+	for (int i = 0; i < counter; i++)
+	{
+		file << *list[i] << std::endl;
+	}
 }
 #endif

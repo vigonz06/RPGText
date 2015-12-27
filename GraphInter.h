@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <string>
 #include "Menu.h"
+#include "Places.h"
 
 class GraphInter
 {
@@ -25,6 +26,11 @@ public:
 	//Output
 	void display(std::string error);
 
+	int menu(Menu* menu);
+	int menu(Places* place);
+
+	int mainMenu();
+
 private:
 
 	static GraphInter* inter;
@@ -32,8 +38,6 @@ private:
 	GraphInter() {}
 
 	int update(int key, int elem, int max_elems);
-
-	int menu(Menu* menu);
 
 	void tab_word(std::string word, int pos, int cont);
 	std::string tab_word(std::string word);

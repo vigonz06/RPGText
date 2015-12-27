@@ -12,12 +12,9 @@ typedef enum Dificultad
 
 struct Npc : public Character
 {
-	//to do David
-	//caracteristicas individuales de los npc
-
 	Dificultad dificultad;
 
-	void init(); //la inicializacion dependera de la dificultad
+	void init();
 };
 
 #endif

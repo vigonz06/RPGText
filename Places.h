@@ -2,10 +2,47 @@
 #define PLACES
 
 #include <string>
+#include <fstream>
+#include "Menu.h"
 
 struct Places
 {
 	std::string id;
+	std::string descripcion;
+	Menu* menu;
+	int orden;
+
+	bool load(std::ifstream &file)
+	{
+		file >> id;
+
+		if (!file.fail())
+		{
+			file >> descripcion;
+
+			if (!file.fail() && menu->load(file))
+			{
+				file >> orden;
+
+				if (!file.fail()) return true;
+
+				else return false;
+			}
+			else return false;
+		}
+		else return false;
+	}
+
+	void save(std::ofstream &file)
+	{
+		file << id << std::endl
+			<< descripcion
+			<< std::endl;
+
+		menu->save(file);
+
+		file << orden;
+	}
 };
 
 #endif

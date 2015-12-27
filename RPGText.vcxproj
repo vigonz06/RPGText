@@ -67,7 +67,6 @@
     <ClInclude Include="Arma.h" />
     <ClInclude Include="Clase.h" />
     <ClInclude Include="Combat.h" />
-    <ClInclude Include="File.h" />
     <ClInclude Include="Globalconstants.h" />
     <ClInclude Include="GraphInter.h" />
     <ClInclude Include="ItemList.h" />
@@ -78,6 +77,7 @@
     <ClInclude Include="ListaClases.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Npc.h" />
+    <ClInclude Include="PlaceList.h" />
     <ClInclude Include="Places.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="UtilsWin.h" />

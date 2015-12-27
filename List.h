@@ -56,26 +56,19 @@ protected:
 	void resize(int dim);
 };
 
-//It search the position where an element should be,
-//makes space for him, and inserts it in this position
 template<class T>
 bool List<T>::insert(T* elem)
 {
 	if (full()) resize(dim + 1);
-	//Look for corresponding position
 	int pos;
 	int ini = 0, fin = counter - 1;
 	search(elem->getId(), pos, ini, fin);
-	//Make space for newcomer
 	shiftRight(pos);
-	//Insert elem
 	list[pos] = elem;
 	counter++;
 	return true;
 }
 
-//Searchs for the element you choose
-//on the list, and deletes it
 template<class T>
 bool List<T>::destroy(const std::string &id)
 {
@@ -113,8 +106,6 @@ void List<T>::erase()
 	counter = 0;
 }*/
 
-//Searchs the position where
-//an element should be
 template<class T>
 bool List<T>::search(const std::string id, int &pos, int ini, int fin) const
 {
@@ -138,9 +129,6 @@ bool List<T>::search(const std::string id, int &pos, int ini, int fin) const
 	}
 }
 
-//Using the id of an element, searchs it
-//on the list and returns the position
-//where it is placed
 template<class T>
 T* List<T>::get(const std::string &id)
 {
@@ -156,9 +144,6 @@ T* List<T>::get(const std::string &id)
 	}
 }
 
-//Saves all the elements of the list on the
-//file you choose, and put the scentinel at
-//the end of the file
 template<class T>
 void List<T>::save(const std::string &name)
 {
@@ -170,9 +155,6 @@ void List<T>::save(const std::string &name)
 	}
 	file.close();
 }
-
-//Loads the elemrnts of the list
-//from the file you choose
 template<class T>
 bool List<T>::load(const std::string &name)
 {
@@ -204,8 +186,6 @@ bool List<T>::load(const std::string &name)
 	else return false;
 }
 
-//It moves every elements on the list
-//to the right from the position you choose
 template<class T>
 void List<T>::shiftRight(const int pos)
 {
@@ -215,8 +195,6 @@ void List<T>::shiftRight(const int pos)
 	}
 }
 
-//It moves every elements on the list
-//to the right from the position you choose
 template <class T>
 void List<T>::shiftLeft(const int pos)
 {
@@ -286,4 +264,4 @@ void List<T>::resize(int dim)
 		this->dim = dim;
 	}
 }
-#endif // !LIST
+#endif
