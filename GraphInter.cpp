@@ -126,21 +126,6 @@ int GraphInter::menu(Places* places)
 	return elem;
 }
 
-int GraphInter::mainMenu()
-{
-	Menu* main = new Menu;
-
-	std::string* options[2];
-
-	*options[0] = "New Game";
-	*options[1] = "Continue";
-
-	main->insert(options[0]);
-	main->insert(options[1]);
-
-	return menu(main);
-}
-
 void GraphInter::tab_word(std::string word, int pos, int cont)
 {
 	if (pos == cont)
