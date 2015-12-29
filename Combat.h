@@ -16,11 +16,16 @@
 class Combat
 {
 public:
-	Combat() {};
+
+	static Combat* get();
 
 	void fight(Npc &actual, Player* player, MenuList* menus);
 
 private:
+
+	Combat() {};
+
+	static Combat* combat;
 
 	void fightkind(std::string &id, Player* player);
 

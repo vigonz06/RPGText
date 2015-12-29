@@ -3,6 +3,11 @@
 #include "MenuList.h"
 #include "GraphInter.h"
 
+Combat* Combat::get()
+{
+	return combat;
+}
+
 void Combat::fightkind(std::string &id, Player* player)
 {
 	id += player->clase.id;
