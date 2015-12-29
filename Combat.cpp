@@ -3,9 +3,28 @@
 #include "MenuList.h"
 #include "GraphInter.h"
 
+Combat* Combat::combat = nullptr;
+
 Combat* Combat::get()
 {
 	return combat;
+}
+
+void Combat::load()
+{
+	if (combat == nullptr)
+	{
+		combat = new Combat;
+	}
+}
+
+void Combat::close()
+{
+	if (combat != nullptr)
+	{
+		delete combat;
+		combat = nullptr;
+	}
 }
 
 void Combat::fightkind(std::string &id, Player* player)

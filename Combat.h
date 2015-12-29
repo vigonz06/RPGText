@@ -18,6 +18,8 @@ class Combat
 public:
 
 	static Combat* get();
+	static void load();
+	static void close();
 
 	void fight(Npc &actual, Player* player, MenuList* menus);
 
