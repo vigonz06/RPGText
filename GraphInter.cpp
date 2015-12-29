@@ -83,15 +83,15 @@ int GraphInter::menu(Menu* menu)
 
 	do
 	{
-		display("Choose your desired option: ");
+		display(menu->scentence);
 
-		for (int i = 0; i < menu->length(); i++)
+		for (int i = 0; i < menu->options.length(); i++)
 		{
-			tab_word(*(menu->operator[](i)), i, elem);
+			tab_word(*(menu->options.operator[](i)), i, elem);
 		}
 
 		key = getKey();
-		elem = update(key, elem, menu->length());
+		elem = update(key, elem, menu->options.length());
 
 		clearConsole();
 
@@ -110,14 +110,15 @@ int GraphInter::menu(Places* places)
 		display("");
 		display(places->descripcion);
 		display(linea());
+		display(places->menu->scentence);
 
-		for (int i = 0; i < places->menu->length(); i++)
+		for (int i = 0; i < places->menu->options.length(); i++)
 		{
-			tab_word(*places->menu->operator[](i), i, elem);
+			tab_word(*places->menu->options.operator[](i), i, elem);
 		}
 
 		key = getKey();
-		elem = update(key, elem, places->menu->length());
+		elem = update(key, elem, places->menu->options.length());
 
 		clearConsole();
 

@@ -1,4 +1,4 @@
-void villa_raiz(string& filename)
+/*void villa_raiz(string& filename)
 {
     limpiar_pantalla();
     int localizacion;
@@ -20,7 +20,7 @@ void villa_raiz(string& filename)
 
         case 2:
             cout << "\nSalir del pueblo a lo kamikaze." << endl;
-            /*kamikaze*/
+            /*kamikaze
             break;
 
         case 3:
@@ -573,4 +573,4 @@ void cueva()
             cout << "Entrada no valida",
             exit(EXIT_FAILURE);
     }
-}
+}*/

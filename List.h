@@ -62,7 +62,7 @@ bool List<T>::insert(T* elem)
 	if (full()) resize(dim + 1);
 	int pos;
 	int ini = 0, fin = counter - 1;
-	search(elem->getId(), pos, ini, fin);
+	search(elem->id, pos, ini, fin);
 	shiftRight(pos);
 	list[pos] = elem;
 	counter++;

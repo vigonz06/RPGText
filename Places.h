@@ -10,7 +10,6 @@ struct Places
 	std::string id;
 	std::string descripcion;
 	Menu* menu;
-	int orden;
 };
 
 #endif

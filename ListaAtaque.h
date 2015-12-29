@@ -1,24 +1,24 @@
-#ifndef LISTAARMAS
-#define LISTAARMAS
+#ifndef LISTAATAQUE
+#define LISTAATAQUE
 
 #include "List.h"
-#include "Arma.h"
+#include "Ataque.h"
 #include <fstream>
 
-class ListaArmas : public List<Arma> 
+class ListaAtaque : public List<Ataque> 
 {
 public:
 
 	bool load(std::ifstream &file)
 	{
 		int n;
-		Arma* nuevo;
+		Ataque* nuevo;
 
 		file >> n;
 
 		for (int i = 0; i < n; i++)
 		{
-			nuevo = new Arma;
+			nuevo = new Ataque;
 
 			if (!nuevo->load(file))
 			{

@@ -2,6 +2,9 @@
 #define COMBAT
 
 #include "Characters.h"
+#include "MenuList.h"
+#include "Player.h"
+#include "Npc.h"
 
 //to do David
 //to do Victor
@@ -10,13 +13,25 @@
 //de esas dos funciones que ves ahi te hablare mas adelante, de momento 
 //me encargo yo de ellas, tu no las toques
 
-class Combate
+class Combat
 {
 public:
-	Combate();
-	~Combate();
+	Combat() {};
 
+	void fight(Npc &actual, Player* player, MenuList* menus);
 
+private:
+
+	void fightkind(std::string &id, Player* player);
+
+	void player_fight(Npc &actual, Player* player, MenuList* menus);
+	void npc_fight(Npc &actual, Player* player);
+
+	void quitar_salud_npc(Npc &actual, int daño);
+	void quitar_salud_jugador(int daño, Player* player);
+	
+	bool comprobar_ataque(int consumible, int comsumido);
+	bool comprobar_vivo(int salud);
 };
 
 #endif

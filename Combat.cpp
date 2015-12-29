@@ -1,243 +1,114 @@
 #include "Combat.h"
+#include "Player.h"
+#include "MenuList.h"
+#include "GraphInter.h"
 
-void inizializar_npc_basico(Npc& actual){
-
-    npc_basico.vida = 50;
-    npc_basico.mana = 50;
-    npc_basico.municion = 0;
-
-}
-void inizializar_npc_medio(Npc& actual){
-
-    npc_basico.vida = 100;
-    npc_basico.mana = 100;
-    npc_basico.municion = 5;
-
-}
-void inizializar_npc_fuerte(Npc& actual){
-
-    npc_basico.vida = 150;
-    npc_basico.mana = 150;
-    npc_basico.municion = 10;
-
+void Combat::fightkind(std::string &id, Player* player)
+{
+	id += player->clase.id;
 }
 
-char devolver_caracter(const Jugador& jugador){ //DEVUELVE EL CARACTER DE LA CLASE DE JUGADOR
+void Combat::player_fight(Npc &actual, Player* player, MenuList* menus)
+{
+	std::string id = "ataque_";
+	int opcion;
 
-    if(jugador.clase == "guerrero"){
-        return 'g';
-    }
-    else if(jugador.clase == "mago"){
-        return 'm';
-    }
-    else if(jugador.clase == "ladron"){
-        return 'l';
-    }
-    return 'f';
+	fightkind(id, player);
+
+	opcion = GraphInter::get()->menu(menus->get(id));
+
+	if (comprobar_ataque(player->consumibles, player->clase.ataques.operator[](opcion)->consumo))
+	{
+		quitar_salud_npc(actual, player->clase.ataques.operator[](opcion)->daño);
+		player->consumibles -= player->clase.ataques.operator[](opcion)->consumo;
+	}
+		//aqui irian los ajustes del daño y el consumo
+	
+}
+	
+bool Combat::comprobar_ataque(int consumible, int consumido)
+{
+	if (consumible >= consumido) return true;
+
+	else return false;
 }
 
-void ataque_guerrero(const Jugador& jugador, Ataque a_jugador){
-    int opcion;
+void Combat::quitar_salud_npc(Npc &actual, int daño)
+{
+	if (actual.armadura >= daño) actual.armadura -= daño;
 
-    vector<int> opciones ={1, 2, 3};
+	else
+	{
+		actual.armadura = 0;
 
-    cout << "elige tu ataque" << endl;
-    cout << "1. Golpe de espada" << endl;
-    cout << "2. Pedo" << endl;
-
-    opcion = recoger_int(opciones);
-
-    do{
-        switch (opcion)
-        {
-        case 1:
-            a_jugador.danio = 10;
-            a_jugador.mana = 0;
-            a_jugador.municion = 0;
-            break;
-        case 2:
-            a_jugador.danio = 1;
-            a_jugador.mana = 1;
-            a_jugador.municion = 0;
-            break;
-    }while(!comprobar_ataque(a_jugador, jugador.mana));
+		actual.vida -= (daño - actual.armadura);
+	}
 }
 
-bool comprobar_ataque(const Ataque& actual, int restante){
+void Combat::quitar_salud_jugador(int daño, Player* player)
+{
+	if (player->armadura >= daño) player->armadura -= daño;
 
+	else
+	{
+		player->armadura = 0;
 
-    if(actual.mana >= restante){
-        return true;
-    }
-    else{
-        return false;
-    }
+		player->vida -= (daño - player->armadura);
+	}
 }
 
-void ataque_mago(const Jugador& jugador, Ataque a_jugador){
-    int opcion;
-    vector<int> opciones ={1, 2, 3};
-
-    cout << "elige tu ataque" << endl;
-    cout << "1. Rayo" << endl;
-    cout << "2. Fuego" << endl;
-
-    opcion = recoger_int(opciones);
-    do{
-        switch (opcion)
-        {
-        case 1:
-            a_jugador.danio = 10;
-            a_jugador.mana = 10;
-            a_jugador.municion = 0;
-            break;
-        case 2:
-            a_jugador.danio = 1;
-            a_jugador.mana = 0;
-            a_jugador.municion = 0;
-            break;
-
-        }
-    }while(!comprobar_ataque(a_jugador, jugador.mana));
-}
-
-void ataque_ladron(const Jugador& jugador, Ataque a_jugador){
-    int opcion;
-    vector<int> opciones ={1, 2, 3};
-
-    cout << "elige tu ataque" << endl;
-    cout << "1. Daga" << endl;
-    cout << "2. veneno" << endl;
-
-    opcion = recoger_int(opciones);
-
-    do{
-        switch (opcion)
-        {
-        case 1:
-            a_jugador.danio = 10;
-            a_jugador.mana = 0;
-            a_jugador.municion = 0;
-            break;
-        case 2:
-            a_jugador.danio = 1;
-            a_jugador.mana = 2;
-            a_jugador.municion = 0;
-            break;
-        }
-    }while(!comprobar_ataque(a_jugador, jugador.mana));
-}
-
-void ataque_jugador(Jugador& jugador, Ataque& a_jugador){
-
-    char clase;
-
-    clase = devolver_caracter(jugador);
-
-    switch (clase)
-    {
-    case 'g':
-        ataque_guerrero(jugador, a_jugador);
-        break;
-    case 'm':
-        ataque_mago(jugador, a_jugador);
-        break;
-    case 'l':
-       ataque_ladron(jugador, a_jugador);
-        break;
-    default:
-
-    break;
-    }
-
-}
-void ataque_npc(Npc& actual, Ataque& a_npc){
+void Combat::npc_fight(Npc &actual, Player* player)
+{
 
     int opcion;
-    opcion = (rand() % 2) + 1;//FUNCION ELEGIR ATAQUE
-    switch (opcion)
-    {
-    case 1:
-        a_npc.danio = 10;
-        a_npc.mana = 0;
-        a_npc.municion = 0;
-        break;
-    case 2:
-        a_npc.danio = 1;
-        a_npc.mana = 2;
-        a_npc.municion = 0;
-        break;
-    }
+    opcion = (rand() % 2) + 1;
+
+	if (comprobar_ataque(actual.consumibles, actual.clase.ataques.operator[](opcion)->consumo))
+	{
+		quitar_salud_jugador(actual.clase.ataques.operator[](opcion)->daño, player);
+		actual.consumibles -= actual.clase.ataques.operator[](opcion)->consumo;
+	}
 }
 
-bool comprobar_vivo(int vida){
+bool Combat::comprobar_vivo(int vida)
+{
 
-    if(vida <= 0){
-        return false;
-    }else{
-        return true;
-    }
+    if(vida <= 0) return false;
+
+    else return true;
 }
 
-void inizializar_npc(Npc& actual){//NUMEROS MAGICOS
-
-
-     if (actual.clase == "basico"){
-
-        actual.vida = 50;
-        actual.mana = 20;
-        actual.municion = 5;
-
-     }else if(actual.clase == "medio"){
-
-        actual.vida = 100;
-        actual.mana = 50;
-        actual.municion = 10;
-
-     }else if(actual.clase == "fuerte"){
-
-        actual.vida = 150;
-        actual.mana = 75;
-        actual.municion = 30;
-
-     }
-
-
-}
-
-void combate(Jugador& jugador, Npc& actual){
-
-    Ataque a_jugador;
-    Ataque a_npc;
-
-
-
+void Combat::fight(Npc &actual, Player* player, MenuList* menus)
+{
     bool continuar = true;
 
     do{
-        if(comprobar_vivo(jugador.vida) == true){
-            ataque_jugador(jugador,a_jugador);
-            actual.vida = actual.vida - a_jugador.danio;
-            jugador.mana = jugador.mana - a_jugador.mana;
-            jugador.municion = jugador.municion - a_jugador.municion;
-        }else{
+        if(comprobar_vivo(player->vida))
+		{
+            player_fight(actual, player, menus);
+        }
+		else
+		{
             continuar = false;
         }
-        if(comprobar_vivo(npc_basico.vida) == true){
-            ataque_npc(actual, a_npc);
-            jugador.vida = jugador.vida - a_npc.danio;
-            actual.mana = actual.mana - a_npc.mana;
-            actual.municion = actual.municion - a_npc.municion;
-        }else{
+        if(comprobar_vivo(actual.vida))
+		{
+			npc_fight(actual, player);
+        }
+		else
+		{
             continuar = false;
         }
 
         //IMPRIMIR DATOS DE COMBATE
         //MEJORAR
-        cout << "vida de " << jugador.nombre << ": " << jugador.vida;
-        cout << "\t";
-        cout << "vida de " << actual.nombre << ": " << npc_basico.vida;
-    }while(continuar == true);
+		GraphInter::get()->display("vida de " + player->id + ": " + std::to_string(player->vida));
+		GraphInter::get()->display("");
+        GraphInter::get()->display("vida de " + actual.id + ": " + std::to_string(actual.vida));
+		GraphInter::get()->pause();
+		GraphInter::get()->clearConsole();
+
+    }while(continuar);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -247,21 +118,19 @@ void bienvenida ()
 
 }
 
-string pregunta_nombre(void)
+std::string pregunta_nombre()
 {
 
-    string nombre;
+    std::string nombre;
 
-    cout << "Como te llamas? ";
+    GraphInter::get()->display("Como te llamas? ");
 
-    getline(cin, nombre);
-
-
+	GraphInter::get()->enter(nombre);
 
     return nombre;
 }
 
-string eleccion_personaje(string nombre)
+/*std::string eleccion_personaje(std::string nombre)
 {
     vector<string> opciones = {"mago", "guerrero", "ladron"};
     string clase;
@@ -355,3 +224,4 @@ string recoger_string(vector<string> opciones)
 
     return opcion;
 }
+*/

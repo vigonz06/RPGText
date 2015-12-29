@@ -1,14 +1,14 @@
-#ifndef ARMA
-#define ARMA
+#ifndef ATAQUE
+#define ATAQUE
 
 #include <string>
 #include <fstream>
 
-struct Arma
+struct Ataque
 {
 	std::string id;
-	float mod_daÃ±o;
-	std::string descripcion;
+	int daño;
+	int consumo;
 
 	bool load(std::ifstream &file)
 	{
@@ -16,11 +16,11 @@ struct Arma
 
 		if (!file.fail())
 		{
-			file >> mod_daÃ±o;
+			file >> daño;
 
 			if (!file.fail())
 			{
-				file >> descripcion;
+				file >> consumo;
 
 				if (!file.fail()) return true;
 
