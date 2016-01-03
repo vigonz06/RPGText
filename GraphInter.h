@@ -26,10 +26,7 @@ public:
 	//Output
 	void display(std::string error);
 
-	int menu(Menu* menu);
-	int menu(Places* place);
-
-	int mainMenu();
+	int menu(std::string options[], int max, std::string scentence);
 
 private:
 

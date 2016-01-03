@@ -21,7 +21,7 @@ public:
 	static void load();
 	static void close();
 
-	void fight(Npc &actual, Player* player, MenuList* menus);
+	void fight(Npc &actual, Player* player);
 
 private:
 
@@ -31,7 +31,7 @@ private:
 
 	void fightkind(std::string &id, Player* player);
 
-	void player_fight(Npc &actual, Player* player, MenuList* menus);
+	void player_fight(Npc &actual, Player* player);
 	void npc_fight(Npc &actual, Player* player);
 
 	void quitar_salud_npc(Npc &actual, int daño);

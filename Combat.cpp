@@ -27,27 +27,25 @@ void Combat::close()
 	}
 }
 
-void Combat::fightkind(std::string &id, Player* player)
+void Combat::player_fight(Npc &actual, Player* player)
 {
-	id += player->clase.id;
-}
-
-void Combat::player_fight(Npc &actual, Player* player, MenuList* menus)
-{
-	std::string id = "ataque_";
+	std::string* options = new std::string[player->clase.ataques.length()];
 	int opcion;
 
-	fightkind(id, player);
+	for (int i = 0; i < player->clase.ataques.length(); i++)
+	{
+		options[i] = player->clase.ataques.operator[](i)->id;
+	}
 
-	opcion = GraphInter::get()->menu(menus->get(id));
+	opcion = GraphInter::get()->menu(options, player->clase.ataques.length(), "Choose your attack:");
 
 	if (comprobar_ataque(player->consumibles, player->clase.ataques.operator[](opcion)->consumo))
 	{
 		quitar_salud_npc(actual, player->clase.ataques.operator[](opcion)->daño);
 		player->consumibles -= player->clase.ataques.operator[](opcion)->consumo;
 	}
-		//aqui irian los ajustes del daño y el consumo
-	
+	delete[] options;
+	options = nullptr;
 }
 	
 bool Combat::comprobar_ataque(int consumible, int consumido)
@@ -63,9 +61,9 @@ void Combat::quitar_salud_npc(Npc &actual, int daño)
 
 	else
 	{
-		actual.armadura = 0;
-
 		actual.vida -= (daño - actual.armadura);
+
+		actual.armadura = 0;
 	}
 }
 
@@ -75,9 +73,9 @@ void Combat::quitar_salud_jugador(int daño, Player* player)
 
 	else
 	{
-		player->armadura = 0;
-
 		player->vida -= (daño - player->armadura);
+
+		player->armadura = 0;
 	}
 }
 
@@ -102,14 +100,14 @@ bool Combat::comprobar_vivo(int vida)
     else return true;
 }
 
-void Combat::fight(Npc &actual, Player* player, MenuList* menus)
+void Combat::fight(Npc &actual, Player* player)
 {
     bool continuar = true;
 
     do{
         if(comprobar_vivo(player->vida))
 		{
-            player_fight(actual, player, menus);
+            player_fight(actual, player);
         }
 		else
 		{
@@ -153,99 +151,3 @@ std::string pregunta_nombre()
 
     return nombre;
 }
-
-/*std::string eleccion_personaje(std::string nombre)
-{
-    vector<string> opciones = {"mago", "guerrero", "ladron"};
-    string clase;
-
-
-
-    cout << "\nDime noble " << nombre << " que clase de aventurero eres?" << endl;
-    cout << "\n\t\t    Guerrero        Mago         Ladron"<< endl;
-    cout << "\tVida:       200 PS          75 PS        150 PS" << endl;
-    cout << "\tMana:       100 PM          200 PM       100 PM" << endl;
-    cout << "\tArma:       Espadazo        Hechizo      Flecha" << endl;
-
-    do
-    {
-        cout << "\nEres guerrero, mago o ladron ?" << endl;
-        clase = recoger_string(opciones);
-        if (clase == "mago")
-        {
-            cout << "\nHas elegido mago" << endl;
-            return "mago";
-        }
-        else if (clase == "guerrero")
-        {
-            cout << "\nHas elegido guerrero" << endl;
-            return "guerrero";
-        }
-        else if (clase == "ladron")
-        {
-            cout << "\nHas elegido ladron" << endl;
-            return "ladron";
-        }
-    }
-    while(clase != "mago" || clase != "guerrero" || clase != "ladron");
-
-    return clase;
-}
-
-int recoger_int(vector<int> opciones)
-{
-
-    int opcion;
-    bool coincidencia = false;
-
-    do
-    {
-        do
-        {
-            cin >> opcion;
-            void clear_the_mess();
-            if(opcion == error)
-            {
-                cout << "dato incorrecto, vuelve a intentarlo" << endl;
-            }
-        }
-        while(opcion == error);
-
-        for(unsigned int i = 0; i < opciones.size(); i++)
-        {
-            if(opcion == opciones[i])
-            {
-                coincidencia = true;
-            }
-        }
-    }
-    while(coincidencia != true);
-
-    return opcion;
-}
-
-string recoger_string(vector<string> opciones)
-{
-
-    string opcion;
-    bool coincidencia = false;
-    do
-    {
-
-        cin >> opcion;
-
-        for(unsigned int i = 0; i < opciones.size(); i++)
-        {
-            if(opcion == opciones[i])
-            {
-                coincidencia = true;
-            }
-        }
-        if(coincidencia != true){
-            cout << "dato incorrecto, vuelve a intentarlo" << endl;
-        }
-    } while(coincidencia != true);
-
-    return opcion;
-}
-*/

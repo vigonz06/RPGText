@@ -9,9 +9,11 @@
 struct Clase
 {
 	std::string id;
+	bool player;
 	std::string descripcion;
 	ListaArmas armas;
 	ListaAtaque ataques;
+	
 
 	bool load(std::ifstream &file)
 	{
@@ -19,11 +21,16 @@ struct Clase
 
 		if (!file.fail())
 		{
-			file >> descripcion;
+			file >> player;
 
-			if (!file.fail() && armas.load(file) && ataques.load(file)) return true;
+			if (!file.fail())
+			{
+				file >> descripcion;
 
-			else return false;
+				if (!file.fail() && armas.load(file) && ataques.load(file)) return true;
+
+				else return false;
+			}
 		}
 	}
 };

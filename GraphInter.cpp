@@ -77,48 +77,21 @@ int GraphInter::update(int key, int elem, int max_elems)
 	return elem;
 }
 
-int GraphInter::menu(Menu* menu)
+int GraphInter::menu(std::string options[], int max, std::string scentence)
 {
 	int key = UP, elem = 0;
 
 	do
 	{
-		display(menu->scentence);
+		display(scentence);
 
-		for (int i = 0; i < menu->options.length(); i++)
+		for (int i = 0; i < max; i++)
 		{
-			tab_word(*(menu->options.operator[](i)), i, elem);
+			tab_word(options[i], i, elem);
 		}
 
 		key = getKey();
-		elem = update(key, elem, menu->options.length());
-
-		clearConsole();
-
-	} while (key != ENTER && key != ESCAPE);
-
-	return elem;
-}
-
-int GraphInter::menu(Places* places)
-{
-	int key = UP, elem = 0;
-
-	do
-	{
-		display(places->id + ": ");
-		display("");
-		display(places->descripcion);
-		display(linea());
-		display(places->menu->scentence);
-
-		for (int i = 0; i < places->menu->options.length(); i++)
-		{
-			tab_word(*places->menu->options.operator[](i), i, elem);
-		}
-
-		key = getKey();
-		elem = update(key, elem, places->menu->options.length());
+		elem = update(key, elem, max);
 
 		clearConsole();
 
