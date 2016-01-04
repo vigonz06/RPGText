@@ -20,6 +20,9 @@ private:
 	void Zona_Oscura();
 	void Catacumbas();
 	void Cofre_Serpiente();
+	void Albacete();
+	void Eleccion_Albacete();
+	void Volcan();
 };
 
 #endif
@@ -51,7 +54,7 @@ void Mapas::Bosque()
     int localizacion= rand()%3+1;
     // = rand()%3+1;
 	GraphInter::get()->clearConsole();
-	find("Bosque");
+	find("bosque");
 
     switch(localizacion)
     {
@@ -93,7 +96,7 @@ void Mapas::Eleccion_Bosque()
     switch (localizacion)
 	{
     case 1:
-        find("zona oscura.txt");
+        find("zona_oscura");
         Zona_Oscura();
         break;
     case 2:
@@ -165,7 +168,7 @@ void Mapas::Cofre_Serpiente()
      switch(localizador)
 	 {
     case 0:
-        find("tripas serpiente.txt");
+        find("tripas_serpiente");
 		GraphInter::get()->display("");
 		GraphInter::get()->display("Conseguiste escapar gracias a tu poderoso hechizo.");
         //albacete();
@@ -181,87 +184,90 @@ void Mapas::Cofre_Serpiente()
         break;
      }
 }
-/*
-void albacete()
+
+void Mapas::Albacete()
 {
-    limpiar_pantalla();
-    imprimir_descripcion("albacete.txt");
-    cout << "\nTomas rumbo a Albacete y " << endl;
-    int localizador= rand()%3+1;
+	GraphInter::get()->clearConsole();
+    find("albacete");
+	GraphInter::get()->display("");
+	GraphInter::get()->display("Tomas rumbo a Albacete y ");
 
-        switch(localizador)
-            {
-                case 1:
-                imprimir_descripcion("iniesta.txt");
-                cout << "\nTe has encontrado con Iniesta tomandose un helado, te lo da y restauras 20 HP." << endl;
-                jugador.vida += 25;
-                cout << "Ahora tienes " << jugador.vida << " HP" << endl;
-                eleccion_en_albacete();
-                break;
+	int localizador = rand() % 3;
 
-                case 2:
-                cout << "\nTe encuentras al 'afilaor': Has obtenido navaja" << endl;
-                imprimir_descripcion("forjador de navajas.txt");
-                eleccion_en_albacete();
-                break;
+    switch(localizador)
+        {
+        case 0:
+			find("iniesta");
+			GraphInter::get()->display("");
+			GraphInter::get()->display("Te has encontrado con Iniesta tomandose un helado, te lo da y restauras 20 HP.");
+			//jugador.vida += 25;
+			//GraphInter::get()->display("Ahora tienes " + std::to_string(jugador.vida) + " HP");
+			Eleccion_Albacete();
+			break;
 
-                case 3:
-                imprimir_descripcion("casa.txt");
-                cout << "\nEntras en una casa y renuncias a tu mision porque encontraste al amor de tu vida." << endl;
-                muerte();
-                break;
+        case 1:
+			GraphInter::get()->display("Te encuentras al 'afilaor': Has obtenido navaja");
+			find("forjador_de_navajas");
+			Eleccion_Albacete();
+			break;
 
-                default:;
-            }
+        case 2:
+			find("casa.txt");
+			GraphInter::get()->display("");
+			GraphInter::get()->display("Entras en una casa y renuncias a tu mision porque encontraste al amor de tu vida.");
+			//muerte();
+			break;
+        }
     }
 
-void eleccion_en_albacete()
+void Mapas::Eleccion_Albacete()
 {
-    vector<int> opciones = {1, 2, 3};
+	std::string options[3];
+	int localizacion;
 
-    cout << "\nY ahora, hacia donde quieres tirar?" << endl;
-    cout << "\nTira 'pal' volcan      [1]"
-         << "\nTira 'pal' pantano     [2]"
-         << "\nMirar el wasap         [3]" << endl;
+	options[0] = "Tira 'pal' volcan";
+	options[1] = "Tira 'pal' pantano";
+	options[2] = "Mirar el wasap";
 
-    int localizacion = recoger_int(opciones);
-    switch (localizacion){
-        case 1:
-            volcan();
-            break;
-        case 2:
-            pantano();
-            break;
-        case 3:
-            wasap();
-            break;
-        default:;
+	localizacion = GraphInter::get()->menu(options, 3, "Y ahora, hacia donde quieres tirar?");
+
+    switch (localizacion)
+	{
+    case 1:
+        Volcan();
+        break;
+    case 2:
+        pantano();
+        break;
+    case 3:
+        wasap();
+        break;
     }
 }
 
-void volcan()
+void Volcan()
 {
-    limpiar_pantalla();
-    int localizador = rand()%3+1;
-    switch (localizador){
-        case 1:
-            imprimir_descripcion("volcan.txt");
-            cout << "\nTe has encontrado con Charmander" << endl;
-            combate(jugador, "charmander");
-            break;
-        case 2:
-            imprimir_descripcion("volcan.txt");
-            cout << "\nTopaste con Bowser" << endl;
-            combate(jugador, "bowser");
-            break;
-        case 3:
-            imprimir_descripcion("volcan.txt");
-            cout << "\nUn Gordete de fuego aparecio" << endl;
-            combate(jugador, "gordo_de_fuego");
-            break;
-        default:;
+	GraphInter::get()->clearConsole();
+	int localizador = rand() % 3;
 
+	find("volcan");
 
+    switch (localizador)
+	{
+    case 0:
+		GraphInter::get()->display("Te has encontrado con Charmander");
+        //combate(jugador, "charmander");
+        break;
+
+    case 1:
+		GraphInter::get()->display("Topaste con Bowser");
+        //combate(jugador, "bowser");
+        break;
+
+    case 2:
+		GraphInter::get()->display("Un Gordete de fuego aparecio");
+        //combate(jugador, "gordo_de_fuego");
+        break;
     }
 }
 
@@ -587,4 +593,4 @@ void cueva()
             combate(jugador, "kraken");
             break;
     }
-}*/
+}
