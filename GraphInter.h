@@ -27,6 +27,7 @@ public:
 	void display(std::string error);
 
 	int menu(std::string options[], int max, std::string scentence);
+	int menu(Places* place);
 
 private:
 

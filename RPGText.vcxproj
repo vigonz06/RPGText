@@ -64,6 +64,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Archivo.h" />
     <ClInclude Include="Arma.h" />
     <ClInclude Include="Ataque.h" />
     <ClInclude Include="Clase.h" />

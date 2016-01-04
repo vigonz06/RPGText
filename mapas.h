@@ -1,171 +1,187 @@
-/*void villa_raiz(string& filename)
+#ifndef MAPAS
+#define MAPAS
+
+#include <string>
+#include "Archivo.h"
+#include "PlaceList.h"
+#include "GraphInter.h"
+
+class Mapas
 {
-    limpiar_pantalla();
-    int localizacion;
-    vector<int> opciones = {1, 2, 3};
-    imprimir_descripcion("villaraiz.txt");
+public:
+	Mapas() {};
 
-    cout << "\n\nIr al bosque                   [1]" << endl;
-    cout << "Salir del pueblo a lo kamikaze     [2]" << endl;
-    cout << "Ir a las cumbres tormentosas       [3]" << endl;
+	void Villa_Raiz(PlaceList* places);
 
-    localizacion = recoger_int(opciones);
+private:
+
+	void Bosque();
+	void Eleccion_Bosque();
+	void Zona_Oscura();
+	void Catacumbas();
+	void Cofre_Serpiente();
+};
+
+#endif
+void Mapas::Villa_Raiz(PlaceList* places)
+{
+	int localizacion;
+
+	localizacion = GraphInter::get()->menu(places->get("villa_raiz"));
 
     switch(localizacion)
     {
-        case 1:
-            cout << "Ir al bosque" << endl;
-            bosque();
-            break;
+    case 1:
+		Bosque();
+        break;
 
-        case 2:
-            cout << "\nSalir del pueblo a lo kamikaze." << endl;
-            /*kamikaze
-            break;
+    case 2:
+		//kamikaze();
+        break;
 
-        case 3:
-            cout << "\nIr a las cumbres tenebrosas." << endl;
-            cumbres_tenebrosas();
-            break;
-
-        }
+    case 3:
+       // Cumbres_Tenebrosas();
+        break;
+    }
 }
 
 
-void bosque( )
+void Mapas::Bosque()
 {
     int localizacion= rand()%3+1;
     // = rand()%3+1;
-    limpiar_pantalla();
+	GraphInter::get()->clearConsole();
+	find("Bosque");
+
     switch(localizacion)
     {
-        case 1:
-            imprimir_descripcion("bosque.txt");
-            cout << "\nTe has encontrado un troll."<< endl;
-            combate(jugador, "troll");
-            eleccion_en_bosque();
-            break;
+    case 1:
+		GraphInter::get()->display("");
+		GraphInter::get()->display("Te has encontrado un troll.");
+        //combate(jugador, "troll");
+        Eleccion_Bosque();
+        break;
 
-        case 2:
-            imprimir_descripcion("bosque.txt");
-            cout << "\nTe has encontrado un unicornio rosa" << endl;
-            combate(jugador, "unicornio_rosa");
-            eleccion_en_bosque();
-            break;
+    case 2:
+		GraphInter::get()->display("");
+		GraphInter::get()->display("Te has encontrado un unicornio rosa.");
+        //combate(jugador, "unicornio_rosa");
+        Eleccion_Bosque();
+        break;
 
-        case 3:
-            imprimir_descripcion("bosque.txt");
-            cout << "Te has encontrado un goomba"<< endl;
-            combate(jugador, "goomba");
-            eleccion_en_bosque();
-            break;
+    case 3:
+		GraphInter::get()->display("");
+		GraphInter::get()->display("Te has encontrado un goomba.");
+        //combate(jugador, "goomba");
+        Eleccion_Bosque();
+        break;
 
     }
 }
 
-void eleccion_en_bosque()
+void Mapas::Eleccion_Bosque()
 {
-    vector<int> opciones = {1, 2, 3};
     int localizacion;
+	std::string options[3];
 
+	options[0] = "Ir a la Zona Oscura";
+	options[1] = "Ir a las Catacumbas";
+	options[2] = "Explorar el Cofre";
 
-    cout << "\nA donde quieres ir?" << endl;
-    cout << "Ir a la Zona oscura   [1]" << endl;
-    cout << "Ir a las Catacumbas   [2]" << endl;
-    cout << "Explorar el Cofre     [3]\n" << endl;
+	localizacion = GraphInter::get()->menu(options, 3, "A donde quieres ir?");
 
-    localizacion = recoger_int(opciones);
-
-    switch (localizacion){
+    switch (localizacion)
+	{
     case 1:
-        imprimir_descripcion("zona oscura.txt");
-        zona_oscura();
+        find("zona oscura.txt");
+        Zona_Oscura();
         break;
     case 2:
-        imprimir_descripcion("catacumbas.txt");
-        cout << "Estas en catacumbas" << endl;
-        catacumbas();
+        find("catacumbas.txt");
+        GraphInter::get()->display("Estas en catacumbas");
+        Catacumbas();
         break;
     case 3:
-        imprimir_descripcion("cofre.txt");
-        cout << "Has encontrado un cofre" << endl;
-        cofre_serpiente();
+        find("cofre.txt");
+        GraphInter::get()->display("Has encontrado un cofre");
+        Cofre_Serpiente();
         break;
-    default:
-        cerr << "Esta opcion no existe" << endl;
+	}
+}
 
+
+void Mapas::Zona_Oscura ()
+{
+	GraphInter::get()->clearConsole();
+	GraphInter::get()->display("");
+	GraphInter::get()->display("Has llegado a la zona oscura y te has encontrado un pikachu. Le despertaste de su siesta y te ha lanzado un impactrueno.");
+    //muerte();
+}
+
+void Mapas::Catacumbas ()
+{
+	GraphInter::get()->clearConsole();
+	GraphInter::get()->display("");
+    GraphInter::get()->display("Has salido del bosque y te encontraste con unas catacumbas");
+
+	int localizacion = rand() % 3;
+
+    switch(localizacion)
+    {
+    case 0:
+		GraphInter::get()->display("");
+		GraphInter::get()->display("Te has encontrado un lobo carmesi.");
+		//combate(jugador, "lobo");
+		//albacete();
+		break;
+
+	case 1:
+		GraphInter::get()->display("");
+		GraphInter::get()->display("Te has encontrado un dinosaurio");
+        //combate(jugador, "dinosaurio");
+        //albacete();
+        break;
+
+	case 2:
+		GraphInter::get()->display("");
+		GraphInter::get()->display("Te has encontrado con Sefirot y te ejecuto de un ataque definitivo");
+        //muerte();
+        break;
     }
 }
 
 
-void zona_oscura ()
+void Mapas::Cofre_Serpiente()
 {
-    limpiar_pantalla();
-    cout << "\nHas llegado a la zona oscura y te has encontrado un pikachu. Le despertaste "
-         << "de su siesta y te ha lanzado un impactrueno." << endl;
-    muerte();
-}
-void catacumbas ()
-{
-    limpiar_pantalla();
-    cout << "\nHas salido del bosque y te encontraste con unas catacumbas" << endl;
-    int localizacion = rand()%3+1;
+    GraphInter::get()->clearConsole();
+	GraphInter::get()->display("");
+	GraphInter::get()->display("Te encontraste con un cofre que contenia una pocion.");
+	/*jugador.vida += 25;
+	cout <<"Ahora tienes: " << jugador.vida << " HP" << endl*/
 
-        switch(localizacion)
-            {
-                case 1:
-                cout << "\nTe has encontrado un lobo carmesi." << endl;
-                combate(jugador, "lobo");
-                albacete();
-                break;
+	GraphInter::get()->display("De repente sale ""Solid Snake""(serpiente gigante) y te come.");
 
-                case 2:
-                cout << "\nTe has encontrado un dinosaurio" << endl;
-                combate(jugador, "dinosaurio");
-                albacete();
-                break;
+	int localizador = rand() % 3;
+     switch(localizador)
+	 {
+    case 0:
+        find("tripas serpiente.txt");
+		GraphInter::get()->display("");
+		GraphInter::get()->display("Conseguiste escapar gracias a tu poderoso hechizo.");
+        //albacete();
+        break;
+    case 1:
+		GraphInter::get()->display("Te desintegraste dentro");
+        //muerte();
+        break;
 
-                case 3:
-                cout << "\nTe has encontrado con Sefirot y te ejecuto de un ataque definitivo" << endl;
-                muerte();
-                break;
-
-                default:
-            ;
-
-            }
-}
-
-
-void cofre_serpiente()
-{
-    limpiar_pantalla();
-    cout << "Te encontraste con un cofre que contenia una pocion." << endl;
-         jugador.vida += 25;
-         cout <<"Ahora tienes: " << jugador.vida << " HP" << endl
-         << "\nDe repente sale ""Solid Snake""(serpiente gigante) y te come.\n" << endl;
-
-     int localizador = rand()%3+1;
-     switch(localizador) {
-        case 1:
-            imprimir_descripcion("tripas serpiente.txt");
-            cout << "\nConseguiste escapar gracias a tu poderoso hechizo." << endl;
-            albacete();
-            break;
-        case 2:
-            cout << "Te desintegraste dentro" << endl;
-            muerte();
-            break;
-
-        case 3:
-            cout << "Tuviste suerte, a la serpiente le dio un corte de digestion por no hacerse caso de su madre,"
-                 << " como consecuencia sales disparado." << endl;
-            albacete();
-            break;
-         default:;
+    case 2:
+		GraphInter::get()->display("Tuviste suerte, a la serpiente le dio un corte de digestion por no hacer caso a su madre, como consecuencia sales disparado.");
+        //albacete();
+        break;
      }
 }
-
+/*
 void albacete()
 {
     limpiar_pantalla();
@@ -223,7 +239,7 @@ void eleccion_en_albacete()
     }
 }
 
-void volcan ()
+void volcan()
 {
     limpiar_pantalla();
     int localizador = rand()%3+1;
@@ -447,6 +463,7 @@ void eleccion_columna_lanza_papua()
             exit(EXIT_FAILURE);
         }
 }
+
 void cadiz ()
 {
     vector<int> opciones = {1, 2, 3};
@@ -569,8 +586,5 @@ void cueva()
             cout << "Kraken" << endl;
             combate(jugador, "kraken");
             break;
-        default:
-            cout << "Entrada no valida",
-            exit(EXIT_FAILURE);
     }
 }*/

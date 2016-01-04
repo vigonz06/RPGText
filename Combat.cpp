@@ -27,6 +27,40 @@ void Combat::close()
 	}
 }
 
+void Combat::fight(Npc &actual, Player* player)
+{
+	bool continuar = true;
+
+	do
+	{
+		if (comprobar_vivo(player->vida))
+		{
+			player_fight(actual, player);
+		}
+		else
+		{
+			continuar = false;
+		}
+		if (comprobar_vivo(actual.vida))
+		{
+			npc_fight(actual, player);
+		}
+		else
+		{
+			continuar = false;
+		}
+
+		//IMPRIMIR DATOS DE COMBATE
+		//MEJORAR
+		GraphInter::get()->display("vida de " + player->id + ": " + std::to_string(player->vida));
+		GraphInter::get()->display("");
+		GraphInter::get()->display("vida de " + actual.id + ": " + std::to_string(actual.vida));
+		GraphInter::get()->pause();
+		GraphInter::get()->clearConsole();
+
+	} while (continuar);
+}
+
 void Combat::player_fight(Npc &actual, Player* player)
 {
 	std::string* options = new std::string[player->clase.ataques.length()];
@@ -47,23 +81,17 @@ void Combat::player_fight(Npc &actual, Player* player)
 	delete[] options;
 	options = nullptr;
 }
-	
-bool Combat::comprobar_ataque(int consumible, int consumido)
+
+void Combat::npc_fight(Npc &actual, Player* player)
 {
-	if (consumible >= consumido) return true;
 
-	else return false;
-}
+	int opcion;
+	opcion = (rand() % 2) + 1;
 
-void Combat::quitar_salud_npc(Npc &actual, int daño)
-{
-	if (actual.armadura >= daño) actual.armadura -= daño;
-
-	else
+	if (comprobar_ataque(actual.consumibles, actual.clase.ataques.operator[](opcion)->consumo))
 	{
-		actual.vida -= (daño - actual.armadura);
-
-		actual.armadura = 0;
+		quitar_salud_jugador(actual.clase.ataques.operator[](opcion)->daño, player);
+		actual.consumibles -= actual.clase.ataques.operator[](opcion)->consumo;
 	}
 }
 
@@ -79,17 +107,23 @@ void Combat::quitar_salud_jugador(int daño, Player* player)
 	}
 }
 
-void Combat::npc_fight(Npc &actual, Player* player)
+void Combat::quitar_salud_npc(Npc &actual, int daño)
 {
+	if (actual.armadura >= daño) actual.armadura -= daño;
 
-    int opcion;
-    opcion = (rand() % 2) + 1;
-
-	if (comprobar_ataque(actual.consumibles, actual.clase.ataques.operator[](opcion)->consumo))
+	else
 	{
-		quitar_salud_jugador(actual.clase.ataques.operator[](opcion)->daño, player);
-		actual.consumibles -= actual.clase.ataques.operator[](opcion)->consumo;
+		actual.vida -= (daño - actual.armadura);
+
+		actual.armadura = 0;
 	}
+}
+	
+bool Combat::comprobar_ataque(int consumible, int consumido)
+{
+	if (consumible >= consumido) return true;
+
+	else return false;
 }
 
 bool Combat::comprobar_vivo(int vida)
@@ -98,39 +132,6 @@ bool Combat::comprobar_vivo(int vida)
     if(vida <= 0) return false;
 
     else return true;
-}
-
-void Combat::fight(Npc &actual, Player* player)
-{
-    bool continuar = true;
-
-    do{
-        if(comprobar_vivo(player->vida))
-		{
-            player_fight(actual, player);
-        }
-		else
-		{
-            continuar = false;
-        }
-        if(comprobar_vivo(actual.vida))
-		{
-			npc_fight(actual, player);
-        }
-		else
-		{
-            continuar = false;
-        }
-
-        //IMPRIMIR DATOS DE COMBATE
-        //MEJORAR
-		GraphInter::get()->display("vida de " + player->id + ": " + std::to_string(player->vida));
-		GraphInter::get()->display("");
-        GraphInter::get()->display("vida de " + actual.id + ": " + std::to_string(actual.vida));
-		GraphInter::get()->pause();
-		GraphInter::get()->clearConsole();
-
-    }while(continuar);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

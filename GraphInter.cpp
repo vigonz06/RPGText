@@ -100,6 +100,31 @@ int GraphInter::menu(std::string options[], int max, std::string scentence)
 	return elem;
 }
 
+int GraphInter::menu(Places* place)
+{
+	int key = UP, elem = 0;
+
+	do
+	{
+		display(place->descripcion);
+		display(linea());
+		display(place->menu->scentence);
+
+		for (int i = 0; i < place->menu->options.length(); i++)
+		{
+			tab_word(*place->menu->options.operator[](i), i, elem);
+		}
+
+		key = getKey();
+		elem = update(key, elem, place->menu->options.length());
+
+		clearConsole();
+
+	} while (key != ENTER && key != ESCAPE);
+
+	return elem;
+}
+
 void GraphInter::tab_word(std::string word, int pos, int cont)
 {
 	if (pos == cont)
