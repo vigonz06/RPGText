@@ -51,28 +51,27 @@ void Mapas::Villa_Raiz(PlaceList* places)
 
 void Mapas::Bosque()
 {
-    int localizacion= rand()%3+1;
-    // = rand()%3+1;
+	int localizacion = rand() % 3;
 	GraphInter::get()->clearConsole();
 	find("bosque");
 
     switch(localizacion)
     {
-    case 1:
+    case 0:
 		GraphInter::get()->display("");
 		GraphInter::get()->display("Te has encontrado un troll.");
         //combate(jugador, "troll");
         Eleccion_Bosque();
         break;
 
-    case 2:
+    case 1:
 		GraphInter::get()->display("");
 		GraphInter::get()->display("Te has encontrado un unicornio rosa.");
         //combate(jugador, "unicornio_rosa");
         Eleccion_Bosque();
         break;
 
-    case 3:
+    case 2:
 		GraphInter::get()->display("");
 		GraphInter::get()->display("Te has encontrado un goomba.");
         //combate(jugador, "goomba");
