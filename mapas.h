@@ -53,7 +53,7 @@ void Mapas::Bosque()
 {
 	int localizacion = rand() % 3;
 	GraphInter::get()->clearConsole();
-	find("bosque");
+	GraphInter::get()->display(find("bosque"));
 
     switch(localizacion)
     {
@@ -95,16 +95,16 @@ void Mapas::Eleccion_Bosque()
     switch (localizacion)
 	{
     case 1:
-        find("zona_oscura");
+		GraphInter::get()->display(find("zona_oscura"));
         Zona_Oscura();
         break;
     case 2:
-        find("catacumbas.txt");
+		GraphInter::get()->display(find("catacumbas"));
         GraphInter::get()->display("Estas en catacumbas");
         Catacumbas();
         break;
     case 3:
-        find("cofre.txt");
+		GraphInter::get()->display(find("cofre"));
         GraphInter::get()->display("Has encontrado un cofre");
         Cofre_Serpiente();
         break;
@@ -167,7 +167,7 @@ void Mapas::Cofre_Serpiente()
      switch(localizador)
 	 {
     case 0:
-        find("tripas_serpiente");
+        GraphInter::get()->display(find("tripas_serpiente"));
 		GraphInter::get()->display("");
 		GraphInter::get()->display("Conseguiste escapar gracias a tu poderoso hechizo.");
         //albacete();
@@ -187,7 +187,7 @@ void Mapas::Cofre_Serpiente()
 void Mapas::Albacete()
 {
 	GraphInter::get()->clearConsole();
-    find("albacete");
+	GraphInter::get()->display(find("albacete"));
 	GraphInter::get()->display("");
 	GraphInter::get()->display("Tomas rumbo a Albacete y ");
 
@@ -196,7 +196,7 @@ void Mapas::Albacete()
     switch(localizador)
         {
         case 0:
-			find("iniesta");
+			GraphInter::get()->display(find("iniesta"));
 			GraphInter::get()->display("");
 			GraphInter::get()->display("Te has encontrado con Iniesta tomandose un helado, te lo da y restauras 20 HP.");
 			//jugador.vida += 25;
@@ -206,12 +206,12 @@ void Mapas::Albacete()
 
         case 1:
 			GraphInter::get()->display("Te encuentras al 'afilaor': Has obtenido navaja");
-			find("forjador_de_navajas");
+			GraphInter::get()->display(find("forjador_de_navajas"));
 			Eleccion_Albacete();
 			break;
 
         case 2:
-			find("casa.txt");
+			GraphInter::get()->display(find("casa.txt"));
 			GraphInter::get()->display("");
 			GraphInter::get()->display("Entras en una casa y renuncias a tu mision porque encontraste al amor de tu vida.");
 			//muerte();
@@ -249,7 +249,7 @@ void Volcan()
 	GraphInter::get()->clearConsole();
 	int localizador = rand() % 3;
 
-	find("volcan");
+	GraphInter::get()->display(find("volcan"));
 
     switch (localizador)
 	{
