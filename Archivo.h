@@ -32,9 +32,16 @@ std::string put(std::ifstream &file, std::string scentinel)
 
 		} while (linea != "" && file.eof());
 
+		file.close();
+
 		return texto;
 	}
-	else return "Text not found";
+	else
+	{
+		file.close();
+
+		return "Text not found";
+	}
 }
 
 std::string find(std::string scentinel)
