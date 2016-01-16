@@ -1,0 +1,14 @@
+id_bienvenida_nombre
+Saludos, intrepido aventurero. Esto... perdona, creo que he olvidado tu nombre, podrias recordarmelo? 
+
+id_bienvenida_clase_1
+Ah, si, claro que eres
+
+id_bienvenida_clase_2
+. Por supuesto que si. El famoso... eh... esto... uff. Ja, ja. A que te dedicabas? 
+
+id_bienvenida_final
+Pues menuda mierda!
+
+clase_mago
+Craft beer out of nothing!
