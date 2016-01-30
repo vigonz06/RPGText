@@ -23,6 +23,7 @@ private:
 	void Albacete();
 	void Eleccion_Albacete();
 	void Volcan();
+	void Pantano();
 };
 
 #endif
@@ -236,7 +237,7 @@ void Mapas::Eleccion_Albacete()
         Volcan();
         break;
     case 2:
-        pantano();
+        Pantano();
         break;
     case 3:
         wasap();
@@ -270,29 +271,27 @@ void Volcan()
     }
 }
 
-void pantano()
+void Mapas::Pantano()
 {
-    limpiar_pantalla();
-    imprimir_descripcion("pantano.txt");
-    cout << "\nShrek approves" << endl;
+	GraphInter::get()->clearConsole();
+    GraphInter::get()->display(find("pantano"));
+	GraphInter::get()->display("\nShrek approves");
 
-    int localizador = rand()%3+1;
-    switch (localizador){
+    int localizador = rand() % 3 + 1;
+
+    switch (localizador)
+	{
         case 1:
-            imprimir_descripcion("pantano.txt");
-
-            cout << "\nTe has encontrado con un mago negro";
-            combate(jugador, "mago_negro");
+			GraphInter::get()->display("\nTe has encontrado con un mago negro");
+            //combate(jugador, "mago_negro");
             break;
         case 2:
-            imprimir_descripcion("pantano.txt");
-            cout << "\nEl gran Ganondorf te reta";
-            combate(jugador, "ganondorf");
+			GraphInter::get()->display("\nEl gran Ganondorf te reta");
+            //combate(jugador, "ganondorf");
             break;
         case 3:
-            imprimir_descripcion("pantano.txt");
-            cout << "\nSale Gargamel y te ataca" << endl;
-            combate(jugador, "gargamel");
+			GraphInter::get()->display("\nSale Gargamel y te ataca");
+            //combate(jugador, "gargamel");
             break;
         default:;
     }

@@ -28,7 +28,8 @@ std::string put(std::ifstream &file, std::string scentinel)
 		do
 		{
 			std::getline(file, linea);
-			texto += linea + '\n';
+
+			if (linea != "") texto += linea + '\n';
 
 		} while (linea != "" && file.eof());
 
