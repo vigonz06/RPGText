@@ -45,11 +45,11 @@ std::string put(std::ifstream &file, std::string scentinel)
 	}
 }
 
-std::string find(std::string scentinel)
+std::string find(std::string scentinel, std::string filename)
 {
 	std::ifstream file;
 
-	file.open("archivos.txt");
+	file.open(filename);
 
 	if (file.is_open())
 	{
