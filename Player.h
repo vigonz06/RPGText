@@ -1,3 +1,6 @@
+#ifndef PLAYER
+#define PLAYER
+
 #include <string>
 #include <fstream>
 
@@ -49,3 +52,5 @@ void Player::save(const std::string &name)
 		//coord.x << std::endl
 		//coord.y << std::endl
 }
+
+#endif

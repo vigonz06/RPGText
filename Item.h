@@ -1,3 +1,6 @@
+#ifndef ITEM
+#define ITEM
+
 #include <string>
 #include <fstream>
 
@@ -31,3 +34,5 @@ void Item::save(std::ofstream &file)
 {
 	file << id << " " << HowMany << std::endl;
 }
+
+#endif

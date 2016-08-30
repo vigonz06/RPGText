@@ -1,3 +1,6 @@
+#ifndef MAINLIST
+#define MAINLIST
+
 #include <string>
 #include <vector>
 
@@ -12,8 +15,8 @@ protected:
 
 public:
 
-	MainList() { list.clear(); }
-	~MainList() { list.clear(); }
+	List() { list.clear(); }
+	~List() { list.clear(); }
 
 	T get(const std::string &id);
 
@@ -131,3 +134,5 @@ void List<T>::save(const std::string &id)
 
 	file.close();
 }
+
+#endif

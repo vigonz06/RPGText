@@ -1,13 +1,16 @@
+#ifndef NPC
+#define NPC
+
 #include <string>
 #include <fstream>
+#include "Coord.h"
 
-struct NPC
+struct Npc
 {
 	std::string id;
+	Coord coord;
 	int health;
 	int power;
-
-	//Coord coord;
 
 	std::string getId() { return id; }
 
@@ -15,7 +18,7 @@ struct NPC
 	void save(std::ofstream &file);
 };
 
-bool NPC::load(std::ifstream &file)
+bool Npc::load(std::ifstream &file)
 {
 	file >> id;
 
@@ -29,10 +32,17 @@ bool NPC::load(std::ifstream &file)
 
 			if (file.fail())
 			{
-				//file >> coord.x;
-				//file >> coord.y;
+				file >> coord.x;
 
-				return true;
+				if (!file.fail())
+				{
+					file >> coord.y;
+
+					if (!file.fail()) return true;
+
+					else return false;
+				}
+				else return false;
 			}
 			else return false;
 		}
@@ -40,3 +50,14 @@ bool NPC::load(std::ifstream &file)
 	}
 	else return false;
 }
+
+void Npc::save(std::ofstream &file)
+{
+	file << id << std::endl
+		<< health << std::endl
+		<< power << std::endl
+		<< coord.x << std::endl
+		<< coord.y << std::endl;
+}
+
+#endif
