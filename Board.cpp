@@ -54,5 +54,5 @@ void Board::create(MapList maps, std::string &id)
 {
 	Board newBoard;
 
-        board = maps.get(id).getBoard().board;
+	*this = maps.get(id).getBoard();
 }
