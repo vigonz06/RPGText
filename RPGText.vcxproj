@@ -64,31 +64,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Archivo.h" />
-    <ClInclude Include="Arma.h" />
-    <ClInclude Include="Ataque.h" />
-    <ClInclude Include="Clase.h" />
-    <ClInclude Include="Combat.h" />
-    <ClInclude Include="Globalconstants.h" />
-    <ClInclude Include="GraphInter.h" />
-    <ClInclude Include="List.h" />
-    <ClInclude Include="Characters.h" />
-    <ClInclude Include="ListaArmas.h" />
-    <ClInclude Include="ListaAtaque.h" />
-    <ClInclude Include="ListaClases.h" />
-    <ClInclude Include="mapas.h" />
-    <ClInclude Include="Menu.h" />
-    <ClInclude Include="MenuList.h" />
-    <ClInclude Include="Npc.h" />
-    <ClInclude Include="OptionList.h" />
-    <ClInclude Include="PlaceList.h" />
-    <ClInclude Include="Places.h" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="Lists.h" />
+    <ClInclude Include="MainList.h" />
+    <ClInclude Include="NPC.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="UtilsWin.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Combat.cpp" />
-    <ClCompile Include="GraphInter.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

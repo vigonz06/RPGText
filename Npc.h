@@ -1,46 +1,42 @@
-#ifndef NPC
-#define NPC
+#include <string>
+#include <fstream>
 
-#include "Characters.h"
-
-typedef enum Dificultad
+struct NPC
 {
-	Facil,
-	Medio,
-	Dificil
+	std::string id;
+	int health;
+	int power;
+
+	//Coord coord;
+
+	std::string getId() { return id; }
+
+	bool load(std::ifstream &file);
+	void save(std::ofstream &file);
 };
 
-struct Npc : public Character
+bool NPC::load(std::ifstream &file)
 {
-	Dificultad dificultad;
-	int daño;
+	file >> id;
 
-	void init()
+	if (!file.fail())
 	{
-		switch (dificultad)
+		file >> health;
+
+		if (!file.fail())
 		{
-		case Facil:
+			file >> power;
 
-			daño = 50;
-			vida = 50;
-			armadura = 0;
-			consumibles = 0;
+			if (file.fail())
+			{
+				//file >> coord.x;
+				//file >> coord.y;
 
-		case Medio:
-
-			daño = 100;
-			vida = 100;
-			armadura = 50;
-			consumibles = 5;
-
-		case Dificil:
-
-			daño = 150;
-			vida = 150;
-			armadura = 100;
-			consumibles = 10;
+				return true;
+			}
+			else return false;
 		}
+		else return false;
 	}
-};
-
-#endif
+	else return false;
+}

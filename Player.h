@@ -1,28 +1,51 @@
-#ifndef PLAYER
-#define PLAYER
-
-#include "Arma.h"
+#include <string>
 #include <fstream>
-#include "Characters.h"
 
-typedef enum Prendas { Casco, Pechera, Capa, Pantalones, Botas };
-
-//to do Victor
-//lista de tipos
-//compartimentar
- struct Ropa
- {
- 	Prendas prenda;
- 	std::string id;
- 	std::string descripcion;
- 	int mejora;
- };
-
-struct Player : public Character
+struct Player
 {
-	Ropa ropas;
+	std::string id;
+	int health;
+	int power;
 
+	//Coord coord;
 
+	std::string getId() { return id; }
+
+	bool load(const std::string &name);
+	void save(const std::string &name);
 };
 
-#endif
+bool Player::load(const std::string &name)
+{
+	std::ifstream file;
+
+	file.open(name);
+
+	if (file.is_open())
+	{
+		file >> id;
+		file >> health;
+		file >> power;
+
+		//file >> coord.x;
+		//file >> coord.y;
+
+		file.close();
+
+		return true;
+	}
+	else return false;
+}
+
+void Player::save(const std::string &name)
+{
+	std::ofstream file;
+
+	file.open(name);
+
+	file << id << std::endl
+		<< health << std::endl
+		<< power << std::endl;
+		//coord.x << std::endl
+		//coord.y << std::endl
+}
