@@ -1,8 +1,6 @@
 #include "Board.h"
 #include "Coord.h"
 
-struct Map;
-
 int Board::dimx;
 int Board::dimy;
 
@@ -10,26 +8,32 @@ bool Board::load(std::ifstream &file)
 {
 	int box;
 
-	file >> dimx;
+	file >> id;
 
 	if (!file.fail())
 	{
-		file >> dimy;
+		file >> dimx;
 
 		if (!file.fail())
 		{
-			for (int i = 0; i < dimy; i++)
+			file >> dimy;
+
+			if (!file.fail())
 			{
-				for (int j = 0; j < dimx; j++)
+				for (int i = 0; i < dimy; i++)
 				{
-					file >> box;
+					for (int j = 0; j < dimx; j++)
+					{
+						file >> box;
 
-					if (!file.fail()) board[j][i] = Box(box);
+						if (!file.fail()) board[j][i] = Box(box);
 
-					else return false;
+						else return false;
+					}
 				}
+				return true;
 			}
-			return true;
+			else return false;
 		}
 		else return false;
 	}
@@ -38,7 +42,9 @@ bool Board::load(std::ifstream &file)
 
 void Board::save(std::ofstream &file)
 {
-	file << dimx << dimy << std::endl;
+	file << id << std::endl
+		<< dimx << " " << dimy 
+		<< std::endl;
 
 	for (int i = 0; i < dimy; i++)
 	{
@@ -50,9 +56,7 @@ void Board::save(std::ofstream &file)
 	}
 }
 
-void Board::create(MapList maps, std::string &id)
+void Board::create(BoardList boards, std::string &id)
 {
-	Board newBoard;
-
-	*this = maps.get(id).getBoard();
+	*this = boards.get(id);
 }
