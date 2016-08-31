@@ -1,11 +1,11 @@
-#ifndef NPC
-#define NPC
+#ifndef ENEMY
+#define ENEMY
 
 #include <string>
 #include <fstream>
 #include "Coord.h"
 
-struct Npc
+struct NPC
 {
 	std::string id;
 	Coord coord;
@@ -18,7 +18,7 @@ struct Npc
 	void save(std::ofstream &file);
 };
 
-bool Npc::load(std::ifstream &file)
+bool NPC::load(std::ifstream &file)
 {
 	file >> id;
 
@@ -51,7 +51,7 @@ bool Npc::load(std::ifstream &file)
 	else return false;
 }
 
-void Npc::save(std::ofstream &file)
+void NPC::save(std::ofstream &file)
 {
 	file << id << std::endl
 		<< health << std::endl

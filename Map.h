@@ -2,9 +2,8 @@
 #define MAP
 
 #include <string>
+#include "Board.h"
 #include <fstream>
-
-class Boaard;
 
 struct Map
 {

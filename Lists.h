@@ -6,7 +6,7 @@
 #include "NPC.h"
 #include "Map.h"
 
-class NPCList : public List<Npc> {};
+class NPCList : public List<NPC> {};
 
 class MapList : public List<Map> {};
 

@@ -16,8 +16,6 @@ private:
 	Box** board;
 	static int dimx, dimy;
 
-	void create(MapList maps, std::string &id);
-
 public:
 
 	Board();
@@ -26,6 +24,8 @@ public:
 
 	static int getDimX() { return dimx; }
 	static int getDimY() { return dimy; }
+
+	void create(MapList maps, std::string &id);
 
 	bool load(std::ifstream &file);
 	void save(std::ofstream &file);
