@@ -68,9 +68,10 @@
     <ClInclude Include="Coord.h" />
     <ClInclude Include="Drawer.h" />
     <ClInclude Include="Item.h" />
-    <ClInclude Include="Lists.h" />
+    <ClInclude Include="ItemList.h" />
+    <ClInclude Include="BoardList.h" />
+    <ClInclude Include="NPCLists.h" />
     <ClInclude Include="MainList.h" />
-    <ClInclude Include="Map.h" />
     <ClInclude Include="NPC.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="UtilsWin.h" />

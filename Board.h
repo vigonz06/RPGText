@@ -2,10 +2,9 @@
 #define BOARD
 
 #include <string>
-#include "Lists.h"
+#include "Coord.h"
 #include <fstream>
-
-struct Coord;
+#include "BoardList.h"
 
 enum Box { ULC, URC, LLC, LRC, CF, HL, VL, EMP, ENMY, PLYR };
 
@@ -13,19 +12,21 @@ class Board
 {
 private:
 
+	std::string id;
+
 	Box** board;
 	static int dimx, dimy;
 
 public:
 
-	Board();
-	Board(const Board &oldBoard);
-	~Board();
+	Board() {};
+	Board(BoardList boards, std::string &id) { create(boards, id); };
 
+	std::string getId()  { return id; }
 	static int getDimX() { return dimx; }
 	static int getDimY() { return dimy; }
 
-	void create(MapList maps, std::string &id);
+	void create(BoardList boards, std::string &id);
 
 	bool load(std::ifstream &file);
 	void save(std::ofstream &file);

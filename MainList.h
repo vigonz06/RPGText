@@ -34,11 +34,11 @@ bool List<T>::search(const std::string &id, int &pos, int &ini, int &fin)
 	{
 		pos = (ini + fin) / 2;
 
-		if (list[pos]->getId() == id) return true;
+		if (list[pos].getId() == id) return true;
 
-		if (list[pos]->getId() < id) ini = pos + 1;
+		if (list[pos].getId() < id) ini = pos + 1;
 
-		if (list[pos]->getId() > id) fin = pos - 1;
+		if (list[pos].getId() > id) fin = pos - 1;
 		
 	}
 	else
@@ -55,8 +55,6 @@ T List<T>::get(const std::string &id)
 	int pos = 0, ini = 0, fin = list.size() - 1;
 
 	if (search(id, pos, ini, fin)) return list[pos];
-
-	else return NULL;
 }
 
 template <class T>
